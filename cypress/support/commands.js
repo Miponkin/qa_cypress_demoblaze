@@ -24,6 +24,15 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('getByPlaceholder', (placeholder) => {
-  cy.get(`[placeholder="${placeholder}"]`);
+// Cypress.Commands.add('getByPlaceholder', (placeholder) => {
+//   cy.get(`[placeholder="${placeholder}"]`);
+// });
+
+Cypress.Commands.add('register', (username, password) => {
+  cy.request('POST', 'api.demoblaze.com/signup', {
+    username,
+    password
+  }).then((response) => {
+    expect(response.status).to.eq(200);
+  });
 });
